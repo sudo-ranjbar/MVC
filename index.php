@@ -1,6 +1,16 @@
 <?php
 # front controller
-include "vendor/autoload.php";
+use App\Core\StupidRouter;
+use App\Utilities\Url;
+
+include "bootstrap/init.php";
 
 
-new \App\Core\Request();
+echo Url::current_route() . "<hr>";
+
+
+$router = new StupidRouter();
+$router->runRoute();
+
+
+
