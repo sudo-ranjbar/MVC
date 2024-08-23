@@ -12,6 +12,7 @@ class StupidRouter
     public function __construct()
     {
         $this->routes = [
+            '/' => 'home/index',
             '/colors/red' => 'colors/red',
             '/colors/green' => 'colors/green',
             '/colors/blue' => 'colors/blue',
@@ -24,7 +25,7 @@ class StupidRouter
 
         foreach ($this->routes as $route => $view) {
             if ($current_route === $route) {
-                include BASEPATH . "views/" . $view . ".php";
+                include BASE_PATH . "views/" . $view . ".php";
             }
         }
     }
