@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use App\Utilities\Url;
 use JetBrains\PhpStorm\NoReturn;
 
 class Request
@@ -26,6 +27,10 @@ class Request
         return $this->params[$key] ?? null;
     }
 
+    public function getUri(): false|string
+    {
+        return Url::current_route();
+    }
 
     public function getMethod()
     {
@@ -41,12 +46,5 @@ class Request
     {
         return $this->agent;
     }
-
-    #[NoReturn] public function redirect($route): void
-    {
-        header("Location: " . site_url($route));
-        die();
-    }
-
 
 }

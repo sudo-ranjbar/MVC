@@ -1,12 +1,20 @@
 <?php
 
+use JetBrains\PhpStorm\NoReturn;
+
 function site_url($route): string
 {
     return $_ENV['URL_ROOT'] . $route;
 }
 
-function random_element($arr)
+#[NoReturn] function redirect($route): void
 {
-    shuffle($arr);
-    return array_pop($arr);
+    header("Location: " . site_url($route));
+    die();
+}
+
+function view($path): void
+{
+    $path = str_replace('.', '/', $path);
+    include BASE_PATH . '/views/' . $path . '.php';
 }

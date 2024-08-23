@@ -2,10 +2,13 @@
 
 use App\Core\Routing\Route;
 
-Route::get('/geturi');
-Route::post('/posturi');
-Route::put('/puturi');
-Route::patch('/patchuri');
+Route::get('/', 'HomeController@index');
 
-echo '<pre>';
-var_dump(Route::routes());
+Route::get('/a', function () {
+    echo 'Hello World! AA';
+});
+Route::get('/b', function () {
+    echo 'Hello World! BB';
+});
+Route::put('/c');
+Route::patch('/d');
