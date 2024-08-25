@@ -3,6 +3,7 @@
 namespace App\Core\Routing;
 
 use App\Core\Request;
+use Exception;
 use JetBrains\PhpStorm\NoReturn;
 
 class Router
@@ -18,7 +19,18 @@ class Router
         $this->request = new Request();
         $this->routes = Route::routes();
         $this->current_route = $this->findRoute($this->request);
+        # run middleware
+        $this->run_route_middleware();
 
+    }
+
+    private function run_route_middleware() {
+        $middlewares = $this->current_route['middleware'];
+
+        foreach ($middlewares as $middleware) {
+            $mid_obj = new $middleware();
+            $mid_obj->handle();
+        }
     }
 
     private function findRoute(Request $request)
@@ -31,6 +43,9 @@ class Router
         return null;
     }
 
+    /**
+     * @throws Exception
+     */
     public function runRouter(): void
     {
         # 405 : invalid request method
@@ -71,7 +86,7 @@ class Router
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     private function dispatch($route): void
     {
@@ -98,15 +113,17 @@ class Router
             $method = $action[1];
 
             if (!class_exists($class)) {
-                throw new \Exception("Controller '$class' does not exist");
+                throw new Exception("Controller '$class' does not exist");
             }
             $controller = new $class();
 
             if (!method_exists($controller, $method)) {
-                throw new \Exception("Method '$method' does not exist");
+                throw new Exception("Method '$method' does not exist");
             }
             $controller->$method();
         }
 
     }
+
+
 }

@@ -13,8 +13,10 @@ function site_url($route): string
     die();
 }
 
-function view($path): void
+function view($path, $data=[]): void
 {
+    extract($data);
+
     $path = str_replace('.', '/', $path);
     include BASE_PATH . '/views/' . $path . '.php';
 }
