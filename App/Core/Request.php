@@ -7,24 +7,28 @@ use JetBrains\PhpStorm\NoReturn;
 
 class Request
 {
-
-    private array $params;
+    private array $route_params;
     private mixed $method;
     private mixed $ip;
     private mixed $agent;
 
     public function __construct()
     {
-        $this->params = $_REQUEST;
+
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->ip = $_SERVER['REMOTE_ADDR'];
         $this->agent = $_SERVER['HTTP_USER_AGENT'];
 
     }
 
-    public function getParams($key)
+    public function add_route_param($key, $value): void
     {
-        return $this->params[$key] ?? null;
+        $this->route_params[$key] = $value;
+    }
+
+    public function get_route_param($key)
+    {
+        return $this->route_params[$key];
     }
 
     public function getUri(): false|string

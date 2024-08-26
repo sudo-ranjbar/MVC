@@ -6,6 +6,7 @@ class ArchivesController
 {
     public function index(): void
     {
+
         view('archives.index');
     }
 

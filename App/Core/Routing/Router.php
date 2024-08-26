@@ -24,23 +24,46 @@ class Router
 
     }
 
-    private function run_route_middleware() {
-        $middlewares = $this->current_route['middleware'];
+    private function run_route_middleware(): void
+    {
 
-        foreach ($middlewares as $middleware) {
-            $mid_obj = new $middleware();
-            $mid_obj->handle();
+        if (!empty($this->current_route['middleware'])) {
+            $middlewares = $this->current_route['middleware'];
+            foreach ($middlewares as $middleware) {
+                $mid_obj = new $middleware();
+                $mid_obj->handle();
+            }
         }
+
     }
 
     private function findRoute(Request $request)
     {
         foreach ($this->routes as $route) {
-            if ($request->getMethod() === $route['methods'] && $request->getUri() === $route['uri']) {
+            if ($request->getMethod() !== $route['methods']) {
+                return null;
+            }
+            if ($this->regex_matched($route)) {
                 return $route;
             }
         }
         return null;
+    }
+
+    public function regex_matched($route): bool
+    {
+        global $request;
+
+        $pattern = "/^" . str_replace(['/', '{', '}'], ['\/', '(?<', '>[-%\w]+)'], $route['uri']) . "$/";
+        $result = preg_match($pattern, $this->request->getUri(), $matches);
+
+        foreach ($matches as $key => $value) {
+            if (!is_int($key)) {
+                $request->add_route_param($key, $value);
+            }
+        }
+
+        return (bool)$result;
     }
 
     /**

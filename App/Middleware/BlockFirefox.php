@@ -11,9 +11,6 @@ class BlockFirefox implements MiddlewareInterface
     {
         global $request;
 
-//        if (Browser::isDesktop()) {
-//            echo "You are using Desktop";
-//        }
         if (Browser::isChrome()) {
             echo 'You are using google chrome';
         }
