@@ -11,7 +11,7 @@ interface CrudInterface
 
 
     # Read (SELECT)
-    public function find(int $id) : object;
+    public function find(int $id) : object|null;
     public function get(array $columns, array $where) : array;
 
 

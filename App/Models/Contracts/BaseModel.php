@@ -10,12 +10,7 @@ abstract class BaseModel implements CrudInterface
     protected int $pageSize = 10;
     protected array $attributes = [];
 
-    protected function __construct() {
-        # if db is mysql => set mysql connection
-    }
 
-//    $user = new UserModel()->find(5);
-//    $user->getAttribute('name');
     protected function getAttribute($attr_name) {
         if (!array_key_exists($attr_name, $this->attributes) || $this->attributes[$attr_name] === null) {
             return null;
