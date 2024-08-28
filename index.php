@@ -6,8 +6,6 @@ include "bootstrap/init.php";
 
 
 
-
-
 $router = new Router();
 try {
     $router->runRouter();

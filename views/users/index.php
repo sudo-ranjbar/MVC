@@ -7,9 +7,14 @@
 </head>
 <body style="background: green">
 <h1>Users ...</h1>
+<?php nice_dump($all_users); ?>
 
-<h2>user2 information</h2>
+<h2>users information</h2>
 
 <?php nice_dump($user10); ?>
+<?php nice_dump($user2['name']); ?>
+
+<h2>number of records with email=ali@mail.com</h2>
+<?php nice_dump($ali_count); ?>
 </body>
 </html>

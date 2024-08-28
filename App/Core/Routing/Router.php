@@ -12,7 +12,6 @@ class Router
     private array $routes;
     private mixed $current_route;
 
-    const CONTROLLERS_NAMESPACE = 'App\Controllers\\';
 
     public function __construct()
     {
@@ -84,6 +83,11 @@ class Router
 
     }
 
+    /**
+     * Dispatch a request to a given callable.
+     * @param $request
+     * @return mixed
+     */
     private function invalidRequest($request): bool
     {
         foreach ($this->routes as $route) {
@@ -125,14 +129,9 @@ class Router
             $action();
         }
 
-        # action = Controller@method
-        if (is_string($action)) {
-            $action = explode('@', $action);
-        }
-
-        # action = ['Controller', 'method']
+        # action = [Controller::class, 'method']
         if (is_array($action)) {
-            $class = self::CONTROLLERS_NAMESPACE . $action[0];
+            $class = $action[0];
             $method = $action[1];
 
             if (!class_exists($class)) {

@@ -40,22 +40,23 @@ class MysqlBaseModel extends BaseModel
 
     public function find(int $id): object|null
     {
-
-        return null;
+        return (object)$this->connection->get($this->table, "*", [$this->primaryKey => $id]);
     }
 
 
     public function get(array $columns, array $where): array
     {
-        $this->connection->select($this->table, $columns, $where);
-
         return $this->connection->select($this->table, $columns, $where);
     }
 
 
     public function getAll(): array
     {
-        return [];
+        echo "getAll works";
+        $all = $this->connection->pdo->prepare("SELECT * FROM $this->table");
+        $all->execute();
+        return $all->fetchAll(\PDO::FETCH_ASSOC);
+
     }
 
 
@@ -71,5 +72,12 @@ class MysqlBaseModel extends BaseModel
         $this->connection->delete($this->table, $where);
         return 1 ?? 0;
     }
+
+
+    public function record_Count(array $where): int
+    {
+        return $this->connection->count($this->table, $where);
+    }
+
 
 }
