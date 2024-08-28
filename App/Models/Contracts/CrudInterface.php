@@ -17,7 +17,7 @@ interface CrudInterface
 
 
     # Update (UPDATE)
-    public function update(array $data, array $where) : int;
+    public function update(array $where, array $data) : int;
 
 
 

@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'amir/mvc',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => '28c68d81cdcb26aea4bafa14c931820d9d2c7449',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '486829640af9dc0160f12ee0d7b77888acfae945',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,11 +11,20 @@
     ),
     'versions' => array(
         'amir/mvc' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '28c68d81cdcb26aea4bafa14c931820d9d2c7449',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '486829640af9dc0160f12ee0d7b77888acfae945',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'catfan/medoo' => array(
+            'pretty_version' => 'v2.1.12',
+            'version' => '2.1.12.0',
+            'reference' => 'd1ff4e0e873a3e032e3d8804031dd6be4e013b22',
+            'type' => 'framework',
+            'install_path' => __DIR__ . '/../catfan/medoo',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

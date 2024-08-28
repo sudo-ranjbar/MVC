@@ -7,8 +7,9 @@
 </head>
 <body style="background: green">
 <h1>Users ...</h1>
-<h2>id = <?= $id?> </h2>
-<h2>name = <?= $name?> </h2>
-<h2>email = <?= $email?> </h2>
+
+<h2>user2 information</h2>
+
+<?php nice_dump($user10); ?>
 </body>
 </html>
